@@ -1,0 +1,122 @@
+## mako
+
+<%page expression_filter="h"/>
+
+<%namespace name='static' file='../static_content.html'/>
+<%namespace file='../main.html' import="login_query"/>
+
+<%!
+from django.urls import reverse
+from django.utils.translation import ugettext as _
+from six import text_type
+%>
+
+<%
+  mktg_site_enabled = static.get_value('ENABLE_MKTG_SITE', settings.FEATURES.get('ENABLE_MKTG_SITE', False))
+  courses_are_browsable = settings.FEATURES.get('COURSES_ARE_BROWSABLE')
+  allows_login = not settings.FEATURES['DISABLE_LOGIN_BUTTON'] and not combined_login_and_register
+  can_discover_courses = settings.FEATURES.get('ENABLE_COURSE_DISCOVERY')
+  allow_public_account_creation = static.get_value('ALLOW_PUBLIC_ACCOUNT_CREATION', settings.FEATURES.get('ALLOW_PUBLIC_ACCOUNT_CREATION'))
+%>
+<nav class="nav-links" aria-label=${_("Supplemental Links")}>
+  <div class="main">
+    <div class="mobile-nav-item hidden-mobile nav-item">
+      <a  href="/about">ABOUT ACE</a>
+    </div>
+    <!-- <div class="mobile-nav-item hidden-mobile nav-item">
+      <a  href="/help">HOW TO REGISTER</a>
+    </div> -->
+    <div class="mobile-nav-item hidden-mobile nav-item dropdown dhelpdown" style="color:#0075b4">
+      ${_('HOW TO REGISTER')}
+      <div class="dropdown-content d-help-content">
+        <h6><a href="/help">Student Registration process</a></h6>
+        <h6><a href="/faq">Teacher Onboarding proces</a></h6>
+        <h6><a href="mailto:admin@theaceuniversity.com" target="_blank">Email</a></h6>
+
+      </div>
+    </div>
+  % if mktg_site_enabled:
+    <div class="mobile-nav-item hidden-mobile nav-item">
+      <a href="${marketing_link('HOW_IT_WORKS')}">${_("How it Works")}</a>
+    </div>
+    % if courses_are_browsable:
+      <div class="mobile-nav-item hidden-mobile nav-item">
+        <a href="${marketing_link('COURSES')}">${_("Courses")}</a>
+      </div>
+    % endif
+    <div class="mobile-nav-item hidden-mobile nav-item">
+      <a href="${marketing_link('SCHOOLS')}">${_("Schools")}</a>
+    </div>
+  % endif
+  % if allows_login:
+    % if can_discover_courses:
+      <div class="mobile-nav-item hidden-mobile nav-item dropdown ddown">
+        <a class="dropbtn dbtn"href="/courses">${_('EXPLORE COURSES')}</a>
+        <div class="dropdown-content d-content">
+          <section class="courses-container">
+            <section class="highlighted-courses">
+          
+              % if settings.FEATURES.get('COURSES_ARE_BROWSABLE'):
+                % if courses:
+
+                  <section class="courses">
+                    <!-- {{courses}} -->
+                    <!-- ${courses} -->
+                    <ul class="courses-listing">
+                      
+                      ## limiting the course number by using HOMEPAGE_COURSE_MAX as the maximum number of courses
+                      %for course in courses:
+                      <a href="${reverse('about_course', args=[text_type(course.id)])}"><li class="courses-listing-item">
+                          <h6 class="course-name">
+                            <!-- <span class="course-organization">${course.display_org_with_default}</span> -->
+                            <!-- <span class="course-code">${course.display_number_with_default}</span> -->
+                            <span class="course-title">${course.display_name_with_default}</span>
+                          </h6>
+                        </li></a>
+                      %endfor
+                    </ul>
+                  </section>  
+                % endif
+              
+              % endif
+          
+            </section>
+          </section>
+        </div>
+      </div>
+    %endif
+  % endif
+  <div class="course-search homepage-search mobile-nav-item hidden-mobile" >
+    <form method="get" action="/courses">
+      <label><span class="sr">${_("Search for a course")}</span>
+        <input class="search-input" name="search_query" type="text" placeholder="${_("Search for a course")}"></input>
+      </label>
+      <button class="search-button" type="submit">
+        <span class="icon fa fa-search" aria-hidden="true"></span><span class="sr">${_("Search")}</span>
+      </button>
+    </form>
+  </div>
+  
+    
+  </div>
+  <div class ="main hidden-mobile">
+    <a class="phone-a" href="mailto:admin@theaceuniversity.com">
+      <div class="phone"><i class="fa fa-envelope circle-icon" ></i><span class="number">admin@theaceuniversity</span></div>
+    </a>
+  </div>
+    
+  <div class="secondary">
+    <div>
+      % if allows_login:
+        % if allow_public_account_creation:
+            <div class="mobile-nav-item hidden-mobile nav-item">
+              <a class="register-btn btn" href="/register${login_query()}">${_("REGISTER")}</a>
+            </div>
+        % endif
+          <div class="mobile-nav-item hidden-mobile nav-item">
+            <a class="sign-in-btn btn" href="/login${login_query()}">${_("SIGN IN")}</a>
+          </div>
+      % endif
+    </div>
+  </div>
+</nav>

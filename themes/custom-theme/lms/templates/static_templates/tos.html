@@ -1,0 +1,58 @@
+<%page expression_filter="h"/>
+<%! from django.utils.translation import ugettext as _ %>
+<%inherit file="../main.html" />
+
+<%block name="pagetitle">${_("Refund Policy")}</%block>
+
+<main id="main" aria-label="Content" tabindex="-1">
+    <section class="container about" style="display: block;"
+        <h1>
+            <%block name="pageheader">${page_header or _("Refund Policy")}</%block>
+        </h1>
+        <br />
+        <br />
+        <p>
+            For details on our refund deadlines and policies, please refer to the information below.
+            
+            <!-- <%block name="pagecontent">${page_content or _("This page left intentionally blank. Feel free to add your own content.")}</%block> -->
+        </p>
+        <br><br>
+        <p>
+            Please note that our payment policies will remain same for all the payments made for course,
+            specialization, and guided project purchases or any other program that taken place through Ace
+            platform. Payment option may vary from one another. There will be no refunds for those who does not
+            receive a passing mark or for those who are not satisfied with the final grading. Also we have no
+            obligation to offer refunds for those who violate Ace policies and we are very strict and will be taking
+            actions on violation of any terms and conditions of Ace.
+
+        </p>
+        <br><br>
+        <p>
+            For Course-on-Course Subscriptions
+        </p>
+        <br><br>
+        <p>
+            Ace will not allow to do refunds for the payments that has been made on a Course-on-Course
+            subscription plan. Learners must cancel the subscription before their fee trails end in order to avoid
+            getting charged when free trial promotions are taken place.
+            If a learner completes a course during the free trial period, Ace hold the right to require the student to
+            pay the course fee in order to issue the specialization certificate or/and to proceed with another course.
+            Your subscription will remain on a course on course basis until you cancel or subscription is suspended
+            or discontinued by Ace. Cancellation will be effective at the end of the current monthly period; you will
+            continue to have access to your subscription for the remainder of that period, and no refund will be
+            given in such a situation.
+        </p>
+        <br><br>
+        <p>
+            Learners are requested to read the course description, module structure, learning outcomes to make
+            sure that course meets their learning objectives.
+        </p>
+        <br><br>
+        <p>
+            However if a course is been cancelled or rescheduled due to quality review or any other unavoidable
+            circumstances , Ace University will allocate the funds to be used in a new course with same or less value.
+            In the case that the initial investment is lower than the new course that the learners wish to take,
+            learners will have to pay the remaining course fee after deduction of the previous course fee.
+        </p>
+    </section>
+</main>

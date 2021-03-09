@@ -1,0 +1,40 @@
+<%page expression_filter="h"/>
+<%! from django.utils.translation import ugettext as _ %>
+<%inherit file="../main.html" />
+
+<%block name="pagetitle">${_("Help")}</%block>
+<head>
+    % if not uses_bootstrap:
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    % endif
+  
+  </head>
+
+<!-- <main id="main" aria-label="Content" tabindex="-1">
+    <section class="video-section">
+        <div class="container">
+            <div class="c-video" >
+                <video class="video" src="/static/custom-theme/images/reg.mp4" controls style="height: 500px;"></video>
+            </div>
+      
+        </div>
+      
+        
+      
+      </section>
+    
+</main> -->
+<main id="main" aria-label="Content" tabindex="-1">
+  <section class="container" style="display: block;">
+      <img src="/static/custom-theme/images/student.png" alt="speaker-img">
+      <div class="mt-5">
+        <h2>Online Payment Method</h2>
+        <ul>
+          <li>Go to <a href="https://mpg.seylan.lk/sltc">https://mpg.seylan.lk/sltc</a></li>
+          <li>Select the option Ace Platform Student</li>
+          <li>Select the course to which you have enrolled</li>
+          <li>Pay using your credit/debit card</li>
+        </ul>
+      </div>
+  </section>
+</main>
